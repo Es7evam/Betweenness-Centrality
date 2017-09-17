@@ -9,9 +9,11 @@ using namespace std; //usado para cin/cout
 int main(void){
 	int n, m, i;
 	cin >> n >> m;
+	int *e = new int[n]; //alocação dinamica
 
 	int maximoPessoas = 0;
 	for(i=0;i<n;i++){
+		cin >> e[i]; //Leitura do input
 		maximoPessoas = max(maximoPessoas, e[i]);
 	}	
 
