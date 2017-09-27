@@ -1,3 +1,5 @@
+#include "bibliotecas.h"
+
 void cria_lista(Lista *L){
 	
 	L->inicio = NULL;
