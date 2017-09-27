@@ -35,7 +35,6 @@ int main(void){
 	}
 	cout << criterioUm(matrizAdj, nroCidades, e) << endl;
 
-	cout << endl << endl; // TESTE, equivale a printf \n\n
 
 	/*PARTE DA LISTA
 	for(int i=0;i<n;i++){

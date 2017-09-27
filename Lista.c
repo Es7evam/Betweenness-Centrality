@@ -7,7 +7,7 @@ void cria_lista(Lista *L){
 }
 
 void finaliza_lista(Lista *L){
-	no *p;
+	aresta *p;
 	p = L->inicio;
 
 	while (p!=NULL){
@@ -27,25 +27,19 @@ int lista_vazia(Lista *L){
 	else return 0;
 }
 
-void insere_aresta_lista(Lista *L, float *x, int *erro){
+void insereLista(Lista *L, int *x){
 
 	aresta *a;
 
 	a = (aresta*)malloc(sizeof(aresta));
 
-	if(a==NULL){
-		*erro = 1;
-		return;
-	}
-	else *erro = 0;
 	a->distancia = *x;
 	a->prox = NULL;
 
-	if(L->inicio == NULL){
-
+	if(L->inicio == NULL)
 		L->inicio = a;
-
-	else L->fim->prox = a;
+	else 
+		L->fim->prox = a;
+	
 	L->fim = a;
 }
-
