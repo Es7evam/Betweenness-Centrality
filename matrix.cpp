@@ -22,6 +22,7 @@ void destroiMatriz(int nroCidades, double **M){
 	free(M);
 }
 
+
 void insereAresta(double **M, int cidade1, int cidade2, double peso){
 	//Supõe-se que sempre deslocarão pela estrada de menor peso entre 2 cidades.
 	M[cidade1][cidade2] = min(M[cidade1][cidade2], peso);
@@ -39,7 +40,7 @@ void floydWarshall(double **M, int nroCidades, int **output){
 			for(j = 0;j < nroCidades; j++){
 				if(M[i][j] > M[i][k] + M[k][j]){
 					M[i][j] = M[i][k] + M[k][j];
-					output[i][j] = k;
+					output[i][j] = k; //k, utilizado no criterio 2
 				}
 			}
 		}

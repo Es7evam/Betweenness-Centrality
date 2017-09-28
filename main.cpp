@@ -8,7 +8,6 @@ int main(void){
 	int maximoPessoas = 0;
 	for(i=0;i<nroCidades;i++){
 		cin >> e[i]; //Leitura do input
-		maximoPessoas = max(maximoPessoas, e[i]); //mudar depois
 	}	
 
 	double **matrizAdj = declaraMatriz(nroCidades);
@@ -28,5 +27,6 @@ int main(void){
 	cout << criterioUm(matrizAdj, nroCidades, e, output) << endl;
 	cout << criterioDois(matrizAdj, nroCidades, e, output) << endl;
 
-
+	free(e);
+	destroiMatriz(nroCidades, matrizAdj);
 }

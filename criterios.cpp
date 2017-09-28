@@ -53,12 +53,12 @@ int criterioDois(double **M, int nroCidades, int *distribEgressos, int **output)
 
 	floydWarshall(M, nroCidades, output);
 
-	for(int i = 0; i < nroCidades; i++){
-		for(int j = 0;j < nroCidades; j++){
-			cout << output[i][j] << " ";
-		}
-		cout << endl;
-	}	
+	// for(int i = 0; i < nroCidades; i++){
+	// 	for(int j = 0;j < nroCidades; j++){
+	// 		cout << output[i][j] << " ";
+	// 	}
+	// 	cout << endl;
+	// }	
 
 	int freqK = 0;
 	int freqCurr, MaxK;
