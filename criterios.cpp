@@ -30,12 +30,12 @@ int criterioUm(double **Grafo, int nroCidades, int *distribEgressos, int **outpu
 		}
 	}
 
-	cout << "Impressao de teste (matrix.cpp)" << endl;
-	for(i=0;i<nroCidades;i++)
-		cout << auxPeso[i] << " ";
-	cout << endl;
 
-	cout << "Criterio 1: ";
+	// Impressao de teste dos custos totais;
+	// for(i=0;i<nroCidades;i++)
+	// 	cout << auxPeso[i] << " ";
+	// cout << endl;
+
 	free(auxPeso); //free no vetor auxiliar
 	destroiMatriz(nroCidades, M); //dá free na matriz
 	return cidadeEscolhida; //transforma em 1 based para o retorno
@@ -53,33 +53,34 @@ int criterioDois(double **M, int nroCidades, int *distribEgressos, int **output)
 
 	floydWarshall(M, nroCidades, output);
 
-	// for(int i = 0; i < nroCidades; i++){
-	// 	for(int j = 0;j < nroCidades; j++){
-	// 		cout << output[i][j] << " ";
-	// 	}
-	// 	cout << endl;
-	// }	
 
-	int freqK = 0;
-	int freqCurr, MaxK;
-	for(k=0;k<nroCidades;k++){
-		freqCurr = 0;
-		for(i = 0; i < nroCidades; i++){
-			for(j = 0;j < nroCidades; j++){
-				if(output[i][j] == k)
-					freqCurr++;
+	int tmp;
+	int *freq = new int[nroCidades];
+	
+	for(i = 0; i < nroCidades; i++){
+		for(j = i+1;j < nroCidades; j++){
+			tmp = j;
+			while(output[i][tmp] != -1){
+				freq[output[i][tmp]]++;
+				tmp = output[i][tmp];
 			}
 		}
-		if(freqCurr > freqK){
-			MaxK = k;
-			freqK = freqCurr;
+	}
+	int maxFreq = 0;
+	int maxI;
+
+	for(i=0;i<nroCidades;i++){	
+		if(freq[i] > maxFreq){
+			maxFreq = freq[i];
+			maxI = i;
 		}
 	}
-	cout << "Criterio 2: ";
+
 
 	for(i=0;i<nroCidades;i++)
 		free(output[i]);
 	free(output);
-	return MaxK;
+
+	return maxI;
 }
 
