@@ -42,7 +42,7 @@ int criterioUm(double **Grafo, int nroCidades, int *distribEgressos, int **outpu
 }
 
 int criterioDois(double **M, int nroCidades, int *distribEgressos, int **output) {
-	int i, j, k;	
+	int i, j;	
 
 	for(int i = 0; i < nroCidades; i++){
 		for(int j = 0;j < nroCidades; j++){
