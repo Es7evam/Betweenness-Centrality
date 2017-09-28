@@ -47,6 +47,7 @@ void insereLista(Lista *L, int *x);
 
 //Declara a matriz de adjacência de tamanho nroCidades*nroCidades e coloca a distância entre todas as cidades como infinito
 double** declaraMatriz(int nroCidades);
+void destroiMatriz(int nroCidades, double **M);
 
 //Insere aresta na matriz de adjacência entre as cidades 1 e 2, com peso "peso"
 //Feita para grafos não direcionados.
@@ -54,21 +55,11 @@ void insereAresta(double **M, int cidade1, int cidade2, double peso);
 
 void floydWarshall(double **M, int nrocidades);
 
-int criterioUm(double **M, int nrocidades, int *distribAlunos);
+int criterioUm(double **M, int nrocidades, int *distribEgressos);
 
 /*
 	Betweenness Centratity - Critério 2
 */
 
-struct paths{
-	Lista path;
-    int initial;
-  	int k;
-  	int *npath;
-  	int *npathWithK;
-};
-
-void FloydWarshallPath(double **M, Lista **path, int nroCidades);
-void pathCounter(Lista **path, paths *p, int curr, int pathWithK);
-void GraphPathCounter(Lista **path, int initial, int dest, int k, int *npath, int *npathWithK);
-void betweennessCentrality(int numCidades, double peso, Lista **path);
+void floydWarshallPath(double **M, int nroCidades, int *distribEgressos, int **output);
+int criterioDois(double **M, int nroCidades, int *distribEgressos);

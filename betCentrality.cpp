@@ -1,62 +1,64 @@
 #include "bibliotecas.h"
 
-void FloydWarshallPath(double **M, Lista **path, int nroCidades){
+void floydWarshallPath(double **M, int nroCidades, int *distribEgressos, int **output){
   	int i, j, k;
 
-  	for(k = 0; k < nroCidades; k++) {
-    	int i;
-    	for(i = 0; i < nroCidades; i++) {
-	      	int j;
-	      	for(j = 0; j < nroCidades; j++) {
-	        	double aux = M[i][k] + M[k][j];
-
-	        	if(k != i && k != j && aux <= M[i][j]) {
-	          		if(aux < M[i][j]) {
-	            		finaliza_lista(&(path[i][j]));
-	          		}
-	          		insereLista(&(path[i][j]), &k);
-
-	          		M[i][j] = aux;
-	        	}
-	      	}
-    	}
-  	}
+	for(k = 0;k<nroCidades;k++){
+		for(i = 0; i < nroCidades; i++){
+			for(j = 0;j < nroCidades; j++){
+				if(M[i][j] > M[i][k] + M[k][j]){
+					M[i][j] = M[i][k] + M[k][j];
+					output[i][j] = k;
+				}
+			}
+		}
+	}
 }
 
-void pathCounter(Lista **path, paths *p, int curr, int pathWithK){
-	//função recursiva que vai passar pelas listas olhando se possui k ou não e contando a quantidade em cada.
-}
 
-void _kNoCaminhoIJ(Lista **path, int initial, int dest, int k, int *npath, int *npathWithK) {
-	paths p;
-	p.initial = initial;
-	p.k = k;
-	p.npath = npath;
-	p.npathWithK = npathWithK;
-  	pathCounter(path, &p, dest, 0);
-}
-
-void betweennessCentrality(int nroCidades, double peso, Lista **path) {
+int criterioDois(double **M, int nroCidades, int *distribEgressos) {
 	int i, j, k;	
-	double* output = new double[nroCidades];
+	int** output = new int*[nroCidades];
+	for(i=0;i<nroCidades;i++)
+		output[i] = new int[nroCidades];
 
 
-	for(k = 0; k < nroCidades; k++) {
-    	int npath = 1;
-    	int npathWithK = 0;
+	for(int i = 0; i < nroCidades; i++){
+		for(int j = 0;j < nroCidades; j++){
+			output[i][j] = -1;
+		}
+	}	
 
-    	for(i = 0; i < nroCidades; i++) {
-    		if(i == k) 
-    			continue;
-      
-      		for(j = 0; j < nroCidades; j++) {
-        		if(j == k)
-        			continue;
 
-        		_kNoCaminhoIJ(path, i, j, k, &npath, &npathWithK);
-      		}
-    	}
+	floydWarshallPath(M, nroCidades, distribEgressos, output);
 
-    	output[k] = npathWithK/npath; //guarda o valor de betweenness centrality de um vertice
-  	}
+	for(int i = 0; i < nroCidades; i++){
+		for(int j = 0;j < nroCidades; j++){
+			cout << output[i][j] << " ";
+		}
+		cout << endl;
+	}	
+
+	int freqK = 0;
+	int freqCurr, MaxK;
+	for(k=0;k<nroCidades;k++){
+		freqCurr = 0;
+		for(i = 0; i < nroCidades; i++){
+			for(j = 0;j < nroCidades; j++){
+				if(output[i][j] == k)
+					freqCurr++;
+			}
+		}
+		if(freqCurr > freqK){
+			MaxK = k;
+			freqK = freqCurr;
+		}
+	}
+	cout << "Criterio 2: ";
+
+	for(i=0;i<nroCidades;i++)
+		free(output[i]);
+	free(output);
+	return MaxK;
 }
+
