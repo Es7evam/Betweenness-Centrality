@@ -19,8 +19,14 @@ int main(void){
 		cin >> cidade1 >> cidade2 >> peso;
 		insereAresta(matrizAdj, cidade1, cidade2, peso);
 	}
-	cout << criterioUm(matrizAdj, nroCidades, e) << endl;
-	cout << criterioDois(matrizAdj, nroCidades, e) << endl;
+
+	int** output = new int*[nroCidades];
+	for(i=0;i<nroCidades;i++)
+		output[i] = new int[nroCidades];
+
+
+	cout << criterioUm(matrizAdj, nroCidades, e, output) << endl;
+	cout << criterioDois(matrizAdj, nroCidades, e, output) << endl;
 
 
 }

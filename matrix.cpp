@@ -28,7 +28,7 @@ void insereAresta(double **M, int cidade1, int cidade2, double peso){
 	M[cidade2][cidade1] = min(M[cidade2][cidade1], peso);
 }
 
-void floydWarshall(double **M, int nroCidades){
+void floydWarshall(double **M, int nroCidades, int **output){
 	int i,j,k;
 
 	for(i = 0;i<nroCidades;i++)
@@ -37,49 +37,11 @@ void floydWarshall(double **M, int nroCidades){
 	for(k = 0;k<nroCidades;k++){
 		for(i = 0; i < nroCidades; i++){
 			for(j = 0;j < nroCidades; j++){
-					M[i][j] = min(M[i][j], M[i][k] + M[k][j]);
+				if(M[i][j] > M[i][k] + M[k][j]){
+					M[i][j] = M[i][k] + M[k][j];
+					output[i][j] = k;
+				}
 			}
 		}
 	}
-
-}
-
-int criterioUm(double **Grafo, int nroCidades, int *distribAlunos){
-	int i,j;
-	double **M = declaraMatriz(nroCidades); //Copia a matriz do grafo
-	for(i = 0; i < nroCidades; i++){
-		for(j = 0;j < nroCidades; j++){
-			M[i][j] = Grafo[i][j];
-		}
-	}
-
-	floydWarshall(M, nroCidades);
-
-	double *auxPeso = new double[nroCidades]; //equivalente ao malloc
-	memset(auxPeso, 0, sizeof(auxPeso)); //Seta a matriz toda como zero
-
-	for(i = 0; i < nroCidades; i++){
-		for(j = 0;j < nroCidades; j++){
-			auxPeso[j] += M[i][j] * distribAlunos[i];
-		}
-	}
-
-	double minDist = 0x3f3f3f; //Infinito
-	int cidadeEscolhida;
-	for(i=0;i<nroCidades;i++){
-		if(auxPeso[i] < minDist){
-			minDist = auxPeso[i];
-			cidadeEscolhida = i;
-		}
-	}
-
-	cout << "Impressao de teste (matrix.cpp)" << endl;
-	for(i=0;i<nroCidades;i++)
-		cout << auxPeso[i] << " ";
-	cout << endl;
-
-	cout << "Criterio 1: ";
-	free(auxPeso); //free no vetor auxiliar
-	destroiMatriz(nroCidades, M); //dá free na matriz
-	return cidadeEscolhida; //transforma em 1 based para o retorno
 }
