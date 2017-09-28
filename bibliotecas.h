@@ -6,10 +6,11 @@
 using namespace std; //usado para cin/cout
 
 /*
-	Parte da Matriz
+	Matrix.cpp
+	TAD para matriz de adjacência
 */
 
-//Declara a matriz de adjacência de tamanho nroCidades*nroCidades e coloca a distância entre todas as cidades como infinito
+//Declara a matriz de adjacência de tamanho "nroCidades" * "nroCidades" e coloca a distância entre todas as cidades como infinito
 double** declaraMatriz(int nroCidades);
 
 //Destrói a matriz de doubles, liberando o seu espaço na memória.
@@ -17,7 +18,7 @@ void destroiMatriz(int nroCidades, double **M);
 
 
 /*
-	Insere aresta na matriz de adjacência (M) entre as cidades 1 e 2, com peso "peso".
+	Insere aresta na matriz de adjacência "M" entre "cidade1" e "cidade2", com peso "peso".
 	Feita para grafos não direcionados.
 	Só irá inserir a aresta se ela for menor do que uma conexão já existente entre a cidade 1 e 2.
 */
