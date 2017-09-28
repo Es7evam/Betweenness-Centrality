@@ -1,6 +1,8 @@
 #include "bibliotecas.h"
 
 int main(void){
+
+    //Declara as variaveis tipo integer "nroCidades", "nroArestas" e "i".
 	int nroCidades, nroArestas, i;
 	cin >> nroCidades >> nroArestas;
 	int *e = new int[nroCidades]; //alocação dinamica
@@ -8,7 +10,7 @@ int main(void){
 	int maximoPessoas = 0;
 	for(i=0;i<nroCidades;i++){
 		cin >> e[i]; //Leitura do input
-	}	
+	}
 
 	double **matrizAdj = declaraMatriz(nroCidades);
 
