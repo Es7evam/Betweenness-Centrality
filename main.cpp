@@ -7,12 +7,14 @@ int main(void){
         da primeira linha de entrada, salvando-os nas variaveis declaradas.
 	*/
 	int nroCidades, nroArestas, i;
+	cout << "Digite o numero de cidades e de estradas entre as cidades, respectivamente" << endl;
 	cin >> nroCidades >> nroArestas;
 
 	/*
         Aloca dinamicamente um vetor "e" de tamanho "nroCidades" e, em seguida, faz a leitura dos inteiros das proximas "nroCidades" linhas,
         salvando-os sequencialmente no vetor "e" para guardar a quantidade de egressos em cada cidade.
 	*/
+	cout << "Digite o numero de egressos em cada cidade, seguindo a ordem de numeraçao delas: 0, 1, 2, ..." << endl;
 	int *e = new int[nroCidades];
 	for(i=0;i<nroCidades;i++){
 		cin >> e[i]; //Leitura do input
@@ -28,6 +30,7 @@ int main(void){
 	*/
 	int cidade1, cidade2;
 	double peso;
+	cout << "Digite as estradas, seguindo o padrão: cidade1 cidade2 tamanhoDaEstrada" << endl;
 	for(i=0;i<nroArestas;i++){
 		cin >> cidade1 >> cidade2 >> peso;
 		insereAresta(matrizAdj, cidade1, cidade2, peso);
@@ -46,8 +49,9 @@ int main(void){
     /*
         Imprime as saidas correspondentes aos criterios do trabalho.
     */
-	cout << criterioUm(matrizAdj, nroCidades, e, output) << endl;
-	cout << criterioDois(matrizAdj, nroCidades, e, output) << endl;
+    cout << "Saidas desejadas:" << endl;
+	cout << "Criterio 1:" << criterioUm(matrizAdj, nroCidades, e, output) << endl;
+	cout << "Criterio 2:" << criterioDois(matrizAdj, nroCidades, e, output) << endl;
 
 	/*
         Libera as memorias alocadas anteriormente, para a resolucao do trabalho.
