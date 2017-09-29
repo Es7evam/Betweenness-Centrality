@@ -54,5 +54,5 @@ int main(void){
 	*/
 	free(e);
 	destroiMatriz(nroCidades, matrizAdj);
-	//  Falta dar free no "output"?
+	// A matriz output foi liberada dentro da função criterioDois.
 }

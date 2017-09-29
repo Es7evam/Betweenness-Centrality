@@ -41,5 +41,8 @@ void floydWarshall(double **M, int nrocidades, int **output);
 		Output: Matriz utilizada para medir os valores do betweeness centrality
 */
 
+//Faz o critério um. Explicado melhor dentro da função.
 int criterioUm(double **M, int nrocidades, int *distribEgressos, int **output);
+
+//Faz o critério dois. Explicado melhor dentro da função.
 int criterioDois(double **M, int nroCidades, int *distribEgressos, int **output);
