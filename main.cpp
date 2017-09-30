@@ -9,6 +9,11 @@ int main(void){
 	int nroCidades, nroArestas, i;
 	cout << "Digite o numero de cidades e de estradas entre as cidades, respectivamente" << endl;
 	cin >> nroCidades >> nroArestas;
+	while(nroCidades < 2 || nroCidades > 50 || nroArestas > nroCidades*nroCidades || nroArestas < 1){
+		cout << "Número digitado inválido, digite novamente." << endl;
+		cout << "Digite o numero de cidades e de estradas entre as cidades, respectivamente" << endl;
+		cin >> nroCidades >> nroArestas;
+	}
 
 	/*
         Aloca dinamicamente um vetor "e" de tamanho "nroCidades" e, em seguida, faz a leitura dos inteiros das proximas "nroCidades" linhas,
@@ -33,6 +38,11 @@ int main(void){
 	cout << "Digite as estradas, seguindo o padrão: cidade1 cidade2 tamanhoDaEstrada" << endl;
 	for(i=0;i<nroArestas;i++){
 		cin >> cidade1 >> cidade2 >> peso;
+		if(cidade1 < 0 || cidade1 >= nroCidades || cidade2 < 0 || cidade2 >= nroCidades || peso < 0){
+			i--;
+			cout << "Valor invalido, digite novamente:" << endl;
+			continue;
+		}
 		insereAresta(matrizAdj, cidade1, cidade2, peso);
 	}
 
